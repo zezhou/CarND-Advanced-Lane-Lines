@@ -1,6 +1,6 @@
 ---
 
-**Advanced Lane Finding Project**
+** Advanced Lane Finding Project **
 
 The goals / steps of this project are the following:
 
@@ -55,9 +55,8 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 
 I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at cell 10 through cell 20 in `p4.ipynb`).  Here's an example of my output for this step.
 
-
-[thresholds]: ./output_images/thresholds.png "Thresholds"
-![alt text][thresholds]
+[pipeline_with_lb]: ./output_images/pipeline_with_lb.png "pipeline with lb"
+![alt text][pipeline_with_lb]
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
@@ -97,11 +96,14 @@ Then I did some other stuff and fit my lane lines with a 2nd order polynomial ki
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in cell 30 in the IPython 
+I did this in cell 30 in the IPython and get following result in test image.
+
+Radius of curvature for example: 479.556090158 m, 2090.39085196 m
+Distance from lane center for example: -0.187687070425 m
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in the IPython notebook located in "p4.ipynb" in the function `draw_lane()`.  Here is an example of my result on a test image:
+I implemented this step in the IPython notebook located in cell 32 through 35 in "p4.ipynb" in the function `draw_lane()`.  Here is an example of my result on a test image:
 
 [draw_lane]: ./output_images/draw_lane.png "draw lane"
 ![alt text][draw_lane]
@@ -120,16 +122,13 @@ Here's a [link to my video result](./project_video_output.mp4)
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
-
 When I do the 'pipeline function' job, I first put all thresholds function together to process images. However I found the result is not good enough and the process speed is slow. Here is the result:
 
 [pipeline_with_all]: ./output_images/pipeline_with_all.png "pipeline with all"
 ![alt text][pipeline_with_all]
 
-I found that the less thresholds would improve the process speed and accuracy because of the combined operator '|'. And I changed the combined method reducing it to 2 thresholds, and the result was more robust.
+I found that the less thresholds would improve the process speed and accuracy because of the combined operator '|'. And I changed the combined method by reducing it to 2 thresholds. The new result was more robust, and the process speed was more fast.
 Here is the new result:
 
 
-[pipeline_with_lb]: ./output_images/pipeline_with_lb.png "pipeline with lb"
 ![alt text][pipeline_with_lb]
