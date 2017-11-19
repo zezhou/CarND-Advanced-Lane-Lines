@@ -1,5 +1,3 @@
----
-
 ** Advanced Lane Finding Project **
 
 The goals / steps of this project are the following:
@@ -99,11 +97,13 @@ Then I did some other stuff and fit my lane lines with a 2nd order polynomial ki
 I did this in cell 30 in the IPython and get following result in test image.
 
 Radius of curvature for example: 479.556090158 m, 2090.39085196 m
+
+
 Distance from lane center for example: -0.187687070425 m
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in the IPython notebook located in cell 32 through 35 in "p4.ipynb" in the function `draw_lane()`.  Here is an example of my result on a test image:
+I implemented this step in the IPython notebook located in cell 32 through cell 35 in "p4.ipynb" in the function `draw_lane()`.  Here is an example of my result on a test image:
 
 [draw_lane]: ./output_images/draw_lane.png "draw lane"
 ![alt text][draw_lane]
