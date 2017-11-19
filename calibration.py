@@ -3,7 +3,7 @@ import cv2
 import glob
 import matplotlib.pyplot as plt
 #%matplotlib qt
-def get_calibrating_points(is_print = False, calibrate_img_path = './camera_cal/calibration*.jpg'):
+def get_calibrating_points( calibrate_img_path = './camera_cal/calibration*.jpg'):
     # prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
     objp = np.zeros((6*9,3), np.float32)
     objp[:,:2] = np.mgrid[0:9,0:6].T.reshape(-1,2)
@@ -14,7 +14,7 @@ def get_calibrating_points(is_print = False, calibrate_img_path = './camera_cal/
 
     # Make a list of calibration images
     images = glob.glob(calibrate_img_path)
-
+    ret_images = []
     # Step through the list and search for chessboard corners
     for fname in images:
         img = cv2.imread(fname)
@@ -25,6 +25,7 @@ def get_calibrating_points(is_print = False, calibrate_img_path = './camera_cal/
 
         # If found, add object points, image points
         if ret == True:
+            ret_images.append(fname)
             objpoints.append(objp)
             imgpoints.append(corners)
             if is_print == True:
@@ -34,11 +35,12 @@ def get_calibrating_points(is_print = False, calibrate_img_path = './camera_cal/
                 cv2.waitKey(500)
 
     cv2.destroyAllWindows()
-    return objpoints, imgpoints
+    return ret_images, objpoints, imgpoints
 
 def calibrate(gray, row_n = 6, col_n = 9):
-    objpoints, imgpoints = get_calibrating_points()
-    ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
+    images, objpoints, imgpoints = get_calibrating_points()
+    ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(
+            objpoints, imgpoints, gray.shape[::-1], None, None)
     return  ret, mtx, dist, rvecs, tvecs
 
 def undistort(img, mtx, dist):
